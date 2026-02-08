@@ -9,17 +9,44 @@ LinkedList<T>::~LinkedList() {
 
 template <typename T>
 void LinkedList<T>::append(const T& elem) {
-    // TODO
+    Node* n = new Node(elem, nullptr);
+
+    if (this->length == 0) {
+        head = n;
+    } else {
+        Node* curr = head;
+        while (curr->next != nullptr) {
+            curr = curr->next;
+        }
+        curr->next = n;
+    }
+
+    this->length++;
 }
 
 template <typename T>
 void LinkedList<T>::clear() {
-    // TODO
+    Node* curr = head;
+    while (curr != nullptr) {
+        Node* next = curr->next;
+        delete curr;
+        curr = next;
+    }
+    head = nullptr;
+    this->length = 0;
 }
 
 template <typename T>
 T LinkedList<T>::getElement(int position) const {
-    // TODO
+    if (position < 0 || position >= this->length) {
+        throw string("Invalid position");
+    }
+
+    Node* curr = head;
+    for (int i = 0; i < position; i++) {
+        curr = curr->next;
+    }
+    return curr->value;
 }
 
 template <typename T>
@@ -34,7 +61,15 @@ bool LinkedList<T>::isEmpty() const {
 
 template <typename T>
 void LinkedList<T>::replace(int position, const T& elem) {
-    // TODO
+    if (position < 0 || position >= this->length) {
+        throw string("Invalid position");
+    }
+
+    Node* curr = head;
+    for (int i = 0; i < position; i++) {
+        curr = curr->next;
+    }
+    curr->value = elem;
 }
 
 template <typename T>
@@ -56,3 +91,4 @@ ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) {
 
     return outStream;
 }
+
