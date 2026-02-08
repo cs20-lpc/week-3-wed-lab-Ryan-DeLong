@@ -1,3 +1,6 @@
+#include <string>
+
+
 template <typename T>
 LinkedList<T>::LinkedList()
 : head(nullptr) { }
@@ -39,7 +42,8 @@ void LinkedList<T>::clear() {
 template <typename T>
 T LinkedList<T>::getElement(int position) const {
     if (position < 0 || position >= this->length) {
-        throw string("Invalid position");
+        throw std::string("Invalid position");
+
     }
 
     Node* curr = head;
@@ -62,7 +66,8 @@ bool LinkedList<T>::isEmpty() const {
 template <typename T>
 void LinkedList<T>::replace(int position, const T& elem) {
     if (position < 0 || position >= this->length) {
-        throw string("Invalid position");
+        throw std::string("Invalid position");
+
     }
 
     Node* curr = head;
